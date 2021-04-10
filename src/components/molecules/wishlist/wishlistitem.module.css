@@ -1,0 +1,8 @@
+.box {
+  font-size: 0.9rem;
+}
+
+.box_item {
+  display: flex;
+  justify-content: space-between;
+}
