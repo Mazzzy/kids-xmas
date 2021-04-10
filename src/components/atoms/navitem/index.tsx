@@ -1,17 +1,21 @@
-import { FC, MouseEvent } from 'react';
+import { FC, MouseEvent, ReactNode } from 'react';
 import styles from './navitem.module.css';
 
 interface NavItemProps {
   href?: string;
   className?: string;
-  children?: any;
+  children?: ReactNode;
   clickHandler?: (e: MouseEvent<HTMLAnchorElement>) => void;
 }
 
-const NavItem: FC<NavItemProps> = ({ href, children, className, clickHandler }) => {
-  const activeClass = className === 'active_navitem' ? styles.active_navitem : className;
+const NavItem: FC<NavItemProps> = ({ href, children, className = '', clickHandler }) => {
+  const dynamicClsNames = className
+    .trim()
+    .split(' ')
+    .map((c) => styles[c])
+    .join(' ');
   return (
-    <a className={`${styles.navbar_item} ${activeClass || ''}`} href={href || '#'} onClick={clickHandler}>
+    <a className={`${styles.navbar_item} ${dynamicClsNames || ''}`} href={href || '#'} onClick={clickHandler}>
       {children}
     </a>
   );

@@ -1,0 +1,35 @@
+.card {
+  box-shadow: 0 0.5em 1em -0.125em rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.02);
+  max-width: 100%;
+  position: relative;
+  margin-bottom: 2.2em;
+  backdrop-filter: blur(16px);
+}
+
+.card .card_header {
+  background-color: transparent;
+  align-items: stretch;
+  box-shadow: 0 0.125em 0.25em rgba(10, 10, 10, 0.1);
+  display: flex;
+  padding: 1rem;
+  text-transform: capitalize;
+}
+
+.card .card_header .card_header_title {
+  align-items: center;
+  color: #363636;
+  display: flex;
+  flex-grow: 1;
+  font-weight: 700;
+  margin: 0;
+  justify-content: space-between;
+}
+
+.card .card_content {
+  background-color: transparent;
+  padding: 1.5rem;
+}
+
+.card .card_content .field {
+  margin-bottom: 0.75rem;
+}
