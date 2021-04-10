@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Layout from '@/components/templates/layout';
 
-const IndexPage: NextPage = () => {
+const IndexPage: NextPage = (): JSX.Element => {
   return (
     <Layout title="Home">
       <main>
