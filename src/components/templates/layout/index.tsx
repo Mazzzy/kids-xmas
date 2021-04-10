@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import Head from 'next/head';
 import Navbar from '@/components/organisms/navbar';
+import Footer from '@/components/organisms/footer';
 
 import styles from './layout.module.css';
 type LayoutProps = {
@@ -17,6 +18,7 @@ const Layout: FC<LayoutProps> = ({ children, title }) => (
       <Navbar />
     </header>
     <div>{children}</div>
+    <Footer />
   </div>
 );
 export default Layout;

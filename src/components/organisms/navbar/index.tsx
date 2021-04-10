@@ -11,12 +11,10 @@ const Navbar: FC = (): JSX.Element => {
   };
 
   return (
-    <header>
-      <nav className={styles.navbar} role="navigation" aria-label="main navigation">
-        <NavBrand />
-        <NavMenu activeTab={activeTab} setActiveTabClick={setActiveTabClick} />
-      </nav>
-    </header>
+    <nav className={styles.navbar} role="navigation" aria-label="main navigation">
+      <NavBrand />
+      <NavMenu activeTab={activeTab} setActiveTabClick={setActiveTabClick} />
+    </nav>
   );
 };
 

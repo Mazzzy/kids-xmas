@@ -1,13 +1,13 @@
 .navbar_item {
   align-items: center;
   cursor: pointer;
-  color: #4a4a4a;
+  color: #ffffff;
   line-height: 1.5;
-  padding: 0.75rem 0.75rem;
+  padding: 0.75rem;
   text-decoration: none;
 }
 
 .active_navitem {
-  border-bottom: 3px solid #3273dc;
-  color: #3273dc;
+  border-bottom: 3px solid #61dbfb;
+  color: #61dbfb;
 }
