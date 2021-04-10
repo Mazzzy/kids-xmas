@@ -1,0 +1,10 @@
+.navbar_menu {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  align-items: stretch;
+}
+.navbar_end {
+  justify-content: flex-end;
+  margin-left: auto;
+}
