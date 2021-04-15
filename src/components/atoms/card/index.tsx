@@ -4,9 +4,10 @@ import styles from './card.module.css';
 interface CardProps {
   title?: string;
   children?: ReactNode;
+  className?: string;
 }
 
-const Card: FC<CardProps> = ({ title, children }) => {
+const Card: FC<CardProps> = ({ title, children, className = '' }) => {
   const renderCardTitle = () => {
     return (
       <div className={styles.card_header}>
@@ -17,7 +18,7 @@ const Card: FC<CardProps> = ({ title, children }) => {
     );
   };
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${className}`}>
       {title ? renderCardTitle() : ''}
       <div className={styles.card_content}>{children}</div>
     </div>
