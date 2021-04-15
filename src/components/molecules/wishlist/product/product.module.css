@@ -1,0 +1,27 @@
+.product_box {
+  background: hsl(255, 0%, 10%);
+  outline: 4px solid hsl(255, 0%, 60%);
+  box-shadow: 0 0 0 8px hsl(255, 0%, 80%), 0 0 0 6px hsl(255, 0%, 90%);
+  border-radius: 2px;
+}
+
+.product_box_item {
+  display: flex;
+  flex-direction: column;
+}
+
+.product_box_head {
+  font-weight: 300;
+  font-size: 1rem;
+  color: #31cff7;
+}
+
+.product_thumbnail {
+  max-width: 100%;
+  margin: 0.75em 0;
+}
+
+.product_box_footer {
+  display: flex;
+  justify-content: space-between;
+}

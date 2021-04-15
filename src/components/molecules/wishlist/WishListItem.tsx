@@ -1,39 +1,33 @@
 import { FC } from 'react';
-
 import Card from '@/components/atoms/card';
 import Badge from '@/components/atoms/badge';
 import Label from '@/components/atoms/label';
 
 import { getDate } from '@/lib/utils';
+import { Product } from '@/lib/types';
+import WishItemProduct from './product';
 import styles from './wishlistitem.module.css';
 
 interface WishListItemProps {
   item: any;
 }
+const staticUserNames = ['Anna', 'Sam', 'Carolina', 'Richie', 'Mike'];
 
 const WishListItem: FC<WishListItemProps> = ({ item }) => {
-  const { id, userId, date } = item;
-
+  const { id, userId, date, products } = item;
   return (
     <Card>
-      <div className={styles.box}>
-        <div className={styles.box_item}>
+      <div className={styles.wish_list}>
+        <div className={styles.wish_list_box}>
           <p>
-            {item?.completed ? <Badge title="Completed" /> : ' '}
-            <Label className="box-item-head">{`For person ${userId}`}</Label>
+            <Badge title={getDate(date)} className={styles.wish_list_date} />
+            <Label>{staticUserNames[userId + 1] || ''}</Label>
           </p>
         </div>
-        <div className="box-item">
-          <p>
-            Id:
-            <Label>{id}</Label>
-          </p>
-          <p>
-            User ID:
-            <Label>{userId}</Label>
-          </p>
-          <p>Date:</p>
-          <Label>{getDate(date)}</Label>
+        <div className={styles.wish_list_box}>
+          {products.map((item: Product, indx: number) => (
+            <WishItemProduct key={`product-item-${id}-${indx}`} productItem={item} />
+          ))}
         </div>
       </div>
     </Card>

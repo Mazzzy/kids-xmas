@@ -1,8 +1,15 @@
-.box {
+.wish_list {
   font-size: 0.9rem;
 }
 
-.box_item {
+.wish_list_box {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+.wish_list_date {
+  position: absolute;
+  top: -23px;
+  transform: rotate(-14deg);
+  left: -40px;
 }
