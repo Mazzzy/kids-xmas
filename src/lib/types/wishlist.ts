@@ -9,3 +9,12 @@ export interface WishItem {
   date: string;
   products: ProductItem[];
 }
+
+export interface Product {
+  id: number;
+  category: string;
+  description: string;
+  image: string;
+  price: number;
+  title: string;
+}

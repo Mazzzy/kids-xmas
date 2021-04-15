@@ -2,11 +2,12 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
-import fetchCarts from '@/lib/queries/fetch-carts';
+import { fetchCarts } from '@/lib/queries';
 import queryClient from '@/lib/rquery-client';
 
 import Layout from '@/components/templates/layout';
 import Dashboard from '@/components/organisms/dashboard';
+import HeadingText from '@/components/atoms/heading';
 
 const IndexPage: InferGetServerSidePropsType<typeof getServerSideProps> = (): JSX.Element => {
   const { status, data, error } = useQuery('allCarts', fetchCarts);
@@ -14,7 +15,7 @@ const IndexPage: InferGetServerSidePropsType<typeof getServerSideProps> = (): JS
   return (
     <Layout title="Home">
       <main>
-        <h1>Welcome to Home page</h1>
+        <HeadingText title="Your Kid's wishlists for Santa this Chirstmas!" />
         <Dashboard wishListData={data} queryStatus={status} errorData={error} />
       </main>
     </Layout>
