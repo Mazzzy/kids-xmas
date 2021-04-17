@@ -3,7 +3,7 @@
   max-width: 100%;
   position: relative;
   margin-bottom: 2.2em;
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(6px);
 }
 
 .card .card_header {

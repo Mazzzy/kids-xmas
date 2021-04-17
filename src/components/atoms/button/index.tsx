@@ -1,29 +1,24 @@
-import { FC, MouseEvent, KeyboardEvent } from 'react';
+import { FC, ReactNode, MouseEvent, KeyboardEvent } from 'react';
 import styles from './button.module.css';
 interface ButtonProps {
-  title?: string;
-  dataVal?: string;
+  id?: string;
   className?: string;
   tabIndex?: number;
+  children?: ReactNode;
   onClick?: (event: MouseEvent<HTMLAnchorElement> | KeyboardEvent<HTMLAnchorElement>) => void;
 }
 
-const Button: FC<ButtonProps> = ({ title, onClick, dataVal, className = '', tabIndex = 0 }) => {
-  const dynamicClsNames = className
-    .trim()
-    .split(' ')
-    .map((c) => styles[c])
-    .join(' ');
+const Button: FC<ButtonProps> = ({ children, onClick, id, className = '', tabIndex = 0 }) => {
   return (
     <a
       role="button"
-      className={`${styles.button} ${dynamicClsNames || ''}`}
+      className={`${styles.button} ${className || ''}`}
       onClick={onClick}
       onKeyDown={onClick}
-      id={dataVal}
+      id={id}
       tabIndex={tabIndex}
     >
-      {title || ''}
+      {children}
     </a>
   );
 };
