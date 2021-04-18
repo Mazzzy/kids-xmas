@@ -1,0 +1,125 @@
+.cart_content {
+  backdrop-filter: blur(6px);
+  margin: 2em 0;
+  padding: 2em;
+}
+.cart_item_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+}
+
+.cart_item {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  padding: 8px;
+}
+.cart_item .product_image {
+  width: 48px;
+  height: 48px;
+}
+.cart_item .product_info {
+  margin-left: 16px;
+  flex-grow: 1;
+}
+.cart_item .product_info .product_name {
+  color: #999;
+  font-size: 14px;
+}
+.cart_item .product_info .product_price {
+  color: #999;
+  font-weight: 700;
+}
+.cart_item .product_info .product_price:before {
+  content: '$ ';
+}
+.cart_item .product_total {
+  margin-left: 16px;
+}
+.cart_item .product_total .quantity {
+  color: #999;
+  font-size: 14px;
+  text-align: right;
+}
+.cart_item .product_total .amount {
+  color: #333;
+  font-weight: 700;
+  text-align: right;
+}
+.cart_item .product_total .amount:before {
+  content: '$ ';
+}
+.cart_item .product_remove {
+  border: none;
+  cursor: pointer;
+  margin-left: 24px;
+  height: 24px;
+  line-height: 24px;
+  width: 24px;
+  font-size: 22px;
+  color: #ccc;
+  text-align: center;
+  background: none;
+}
+.cart_item .product_remove:hover {
+  color: #e23d3d;
+}
+.cart_item:hover {
+  background: rgba(147, 220, 156, 0.15);
+}
+
+.checkout_block {
+  line-height: 22px;
+  margin: 16px 0;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #61dbfb;
+  padding: 16px 0;
+}
+
+.checkout_block .numeric_info {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.cart_total:before {
+  content: '$ ';
+}
+
+.action_block {
+  background: #fff;
+  width: 100%;
+}
+.action_block button {
+  height: 36px;
+  border-radius: 2px;
+  text-align: center;
+  color: #fff;
+  background: #077915;
+  border: 0;
+  font-weight: 400;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  background: #fc7710;
+  display: block;
+  width: 100%;
+}
+.action_block button:hover {
+  background: #0aa91d;
+}
+.action_block button:focus {
+  outline: none;
+}
+.action_block button:active {
+  background: #0bc122;
+}
+.action_block button.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
