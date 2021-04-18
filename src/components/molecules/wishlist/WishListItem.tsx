@@ -22,11 +22,9 @@ const WishListItem: FC<WishListItemProps> = ({ item, openModal, staticUserName =
 
   return (
     <Card>
-      <div className={styles.wish_list_box}>
-        <p>
-          <Badge title={getDate(date)} className={styles.wish_list_date} />
-          <Label>{staticUserName || ''}</Label>
-        </p>
+      <div className={`${styles.wish_list_box} ${styles.wish_list_head}`}>
+        <Badge title={staticUserName || ''} className={styles.wish_list_name} />
+        <Label>{getDate(date)}</Label>
       </div>
       <div className={styles.wish_list_box}>
         {products.map((item: Product, indx: number) => (

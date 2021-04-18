@@ -18,7 +18,6 @@ const WishItemProduct: FC<WishItemProductProps> = ({ addToCart, openModal, produ
   const { status, data, error } = useQuery(['product', productId], () => fetchProduct(productId));
   const [itemQuantity, updateItemQuantity] = useState<number>(quantity);
   const [isAdded, setAddState] = useState<boolean>(false);
-
   useEffect(() => {
     if (!isAdded) {
       return;
@@ -80,9 +79,11 @@ const WishItemProduct: FC<WishItemProductProps> = ({ addToCart, openModal, produ
               <button
                 className={!isAdded ? '' : styles.added}
                 type="button"
-                onClick={() => addButtonClicked(image, title, price, productId, itemQuantity)}
+                onClick={() => {
+                  addButtonClicked(image, title, price, productId, itemQuantity);
+                }}
               >
-                {!isAdded ? 'ADD TO CART' : '✔ ADDED'}
+                {!isAdded ? 'APPROVE IT ?' : '✔ APPROVED'}
               </button>
             </div>
           </div>

@@ -24,14 +24,14 @@ const NavMenu: FC<NavMenuProps> = ({ activeTab, setActiveTabClick }) => {
           clickHandler={(e: MouseEvent<HTMLAnchorElement>) => setActiveTabClick(e, 'cart')}
         >
           <div className={styles.navbar_menu_cart}>
-            <ul className={styles.navbar_menu_info}>
+            {/* <ul className={styles.navbar_menu_info}>
               <li>
-                No. of items: <strong>{totalItems}</strong>
+                No. of categories: <strong>{totalItems}</strong>
               </li>
               <li>
                 Sub Total: <strong className={styles.navbar_info_total}>{totalAmount}</strong>
               </li>
-            </ul>
+            </ul> */}
             <img src="https://res.cloudinary.com/sivadass/image/upload/v1493548928/icons/bag.png" alt="Cart" />
             {totalItems ? <span className={styles.cartCount}>{totalItems}</span> : ''}
           </div>

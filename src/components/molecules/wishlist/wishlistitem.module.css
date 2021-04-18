@@ -6,9 +6,15 @@
   position: relative;
   display: flex;
 }
-.wish_list_date {
+.wish_list_head {
+  justify-content: flex-end;
+  font-size: 22px;
+  font-weight: 700;
+}
+.wish_list_name {
   position: absolute;
-  top: -23px;
+  top: -26px;
   transform: rotate(-14deg);
-  left: -40px;
+  left: -52px;
+  padding: 0 2.5em;
 }

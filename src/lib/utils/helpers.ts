@@ -8,3 +8,7 @@ export function getDate(timestamp: Date): string {
 
   return convertedDate;
 }
+
+export function ruleForDiscount(count: number): number {
+  return count >= 2 && count < 10 ? count / 10 : 0;
+}

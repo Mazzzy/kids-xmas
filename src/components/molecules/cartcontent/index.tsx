@@ -1,6 +1,7 @@
 import { FC, useContext } from 'react';
 import { CartContext, InitContext } from '@/lib/context/provider';
 import { ProductLocal } from '@/lib/types';
+import { ruleForDiscount } from '@/lib/utils';
 
 import EmptyCart from '@/components/molecules/emptycart';
 import styles from './cartcontent.module.css';
@@ -8,7 +9,13 @@ import styles from './cartcontent.module.css';
 const CartContent: FC = () => {
   const { cart, totalAmount, removeProduct } = useContext<InitContext>(CartContext);
   let totalUnits = 0;
+  let finalAmountToCheckout = 0;
   const cartItems = cart.map((product: ProductLocal) => {
+    const discountFraction = ruleForDiscount(product.quantity);
+    const actualProductTotal = product.quantity * product.price;
+    const discountAmount = actualProductTotal * discountFraction;
+    const finalProductAmount = actualProductTotal - discountAmount;
+    finalAmountToCheckout += finalProductAmount;
     totalUnits += product.quantity;
     return (
       <ul key={product.id} className={styles.cart_item_list}>
@@ -16,13 +23,25 @@ const CartContent: FC = () => {
           <img className={styles.product_image} src={product.image} alt="product" />
           <div className={styles.product_info}>
             <p className={styles.product_name}>{product.title}</p>
-            <p className={styles.product_price}>{product.price}</p>
+            <p className={styles.cart_item_info}>
+              Unit price: <span className={styles.product_price}>{product.price.toFixed(2)}</span>
+            </p>
+            <p className={styles.cart_item_info}>
+              {`Discounted price ${discountFraction * 100}% `}
+              <span className={`${styles.product_price} ${styles.discount_price}`}>{discountAmount.toFixed(2)}</span>
+            </p>
           </div>
           <div className={styles.product_total}>
             <p className={styles.quantity}>
               {product.quantity} {product.quantity > 1 ? 'Nos.' : 'No.'}{' '}
             </p>
-            <p className={styles.amount}>{product.quantity * product.price}</p>
+            <p className={styles.cart_item_info}>
+              Actual amount:{' '}
+              <span className={`${styles.amount} ${styles.actual_amount}`}>{actualProductTotal.toFixed(2)}</span>
+            </p>
+            <p className={styles.cart_item_info}>
+              After discount: <span className={styles.amount}>{finalProductAmount.toFixed(2)}</span>
+            </p>
           </div>
           <button className={styles.product_remove} onClick={() => removeProduct(product.id)} type="button">
             ×
@@ -45,7 +64,9 @@ const CartContent: FC = () => {
         </div>
         <div className={styles.checkout_block}>
           <span>Total amount to pay: </span>
-          <span className={`${styles.numeric_info} ${styles.cart_total}`}>{totalAmount || ''}</span>
+          <span className={`${styles.numeric_info} ${styles.cart_total}`}>
+            {finalAmountToCheckout.toFixed(2) || ''}
+          </span>
         </div>
 
         <div className={styles.action_block}>
