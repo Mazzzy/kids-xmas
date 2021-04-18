@@ -14,18 +14,18 @@ import styles from './wishlistitem.module.css';
 interface WishListItemProps {
   item: any;
   openModal: (product: QuickPreview) => void;
+  staticUserName: string;
 }
-const staticUserNames = ['Anna', 'Sam', 'Carolina', 'Richie', 'Mike'];
-
-const WishListItem: FC<WishListItemProps> = ({ item, openModal }) => {
+const WishListItem: FC<WishListItemProps> = ({ item, openModal, staticUserName = '' }) => {
   const { addProduct } = useContext<InitContext>(CartContext);
-  const { id, userId, date, products } = item;
+  const { id, date, products } = item;
+
   return (
     <Card>
       <div className={styles.wish_list_box}>
         <p>
           <Badge title={getDate(date)} className={styles.wish_list_date} />
-          <Label>{staticUserNames[userId + 1] || ''}</Label>
+          <Label>{staticUserName || ''}</Label>
         </p>
       </div>
       <div className={styles.wish_list_box}>

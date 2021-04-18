@@ -1,0 +1,31 @@
+.no_results {
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.no_results img {
+  width: 320px;
+  margin: 16px 0 32px 0;
+  opacity: 0.33;
+}
+.no_results h2 {
+  margin-bottom: 16px;
+  color: #666;
+}
+.no_results p {
+  color: #999;
+}
+.products {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  padding: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .products {
+    padding: 8px;
+  }
+}
