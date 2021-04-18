@@ -37,6 +37,11 @@ const cartReducer = (state: InitContext, action: any) => {
         totalAmount: newTotalAmount,
       };
     }
+    case 'ADD_SEARCH_TERM':
+      return {
+        ...state,
+        searchTerm: action.payload,
+      };
     default:
       return state;
   }

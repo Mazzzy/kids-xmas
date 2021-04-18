@@ -6,15 +6,17 @@ export interface InitContext {
   cart: ProductLocal[];
   totalItems: number;
   totalAmount: number;
+  searchTerm: string;
   removeProduct?: (id: number) => void;
   addProduct?: (selectedProducts: ProductLocal) => void;
-  bouceEnd?: () => void;
+  addSearchTerm?: (searchTerm: string) => void;
 }
 
 const initialState = {
   cart: [],
   totalItems: 0,
   totalAmount: 0,
+  searchTerm: '',
 };
 
 export const CartContext = createContext<InitContext>(initialState);
@@ -35,14 +37,23 @@ export const CartProvider = ({ children }: { children: any }) => {
     });
   };
 
+  const addSearchTerm = (searchTerm: string) => {
+    dispatch({
+      type: 'ADD_SEARCH_TERM',
+      payload: searchTerm,
+    });
+  };
+
   return (
     <CartContext.Provider
       value={{
         cart: state.cart,
         totalItems: state.totalItems,
         totalAmount: state.totalAmount,
+        searchTerm: state.searchTerm,
         removeProduct,
         addProduct,
+        addSearchTerm,
       }}
     >
       {children}

@@ -22,6 +22,7 @@
   margin: auto;
   transition: transform 300ms ease-in;
   transform: scale(1);
+  padding-top: 32px;
 }
 @media (min-width: 991px) {
   .product .product_image img {
