@@ -10,11 +10,13 @@ const CartContent: FC = () => {
   const { cart, totalAmount, removeProduct } = useContext<InitContext>(CartContext);
   let totalUnits = 0;
   let finalAmountToCheckout = 0;
+  let totalDiscountAmount = 0;
   const cartItems = cart.map((product: ProductLocal) => {
     const discountFraction = ruleForDiscount(product.quantity);
     const actualProductTotal = product.quantity * product.price;
     const discountAmount = actualProductTotal * discountFraction;
     const finalProductAmount = actualProductTotal - discountAmount;
+    totalDiscountAmount += discountAmount;
     finalAmountToCheckout += finalProductAmount;
     totalUnits += product.quantity;
     return (
@@ -62,8 +64,23 @@ const CartContent: FC = () => {
           <span>Total number of Units: </span>
           <span className={styles.numeric_info}>{totalUnits || ''}</span>
         </div>
+
         <div className={styles.checkout_block}>
-          <span>Total amount to pay: </span>
+          <span>Total actual amount : </span>
+          <span className={`${styles.numeric_info} ${styles.cart_total} ${styles.actual_amount}`}>
+            {totalAmount.toFixed(2) || ''}
+          </span>
+        </div>
+
+        <div className={styles.checkout_block}>
+          <span>Total discount: </span>
+          <span className={`${styles.numeric_info} ${styles.cart_total} ${styles.discount_price}`}>
+            {totalDiscountAmount.toFixed(2) || ''}
+          </span>
+        </div>
+
+        <div className={styles.checkout_block}>
+          <span>Final amount to pay: </span>
           <span className={`${styles.numeric_info} ${styles.cart_total}`}>
             {finalAmountToCheckout.toFixed(2) || ''}
           </span>
