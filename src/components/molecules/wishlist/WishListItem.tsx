@@ -14,11 +14,20 @@ import styles from './wishlistitem.module.css';
 interface WishListItemProps {
   item: any;
   openModal: (product: QuickPreview) => void;
+  staticUserId: string;
   staticUserName: string;
 }
-const WishListItem: FC<WishListItemProps> = ({ item, openModal, staticUserName = '' }) => {
-  const { addProduct } = useContext<InitContext>(CartContext);
+const WishListItem: FC<WishListItemProps> = ({ item, openModal, staticUserName = '', staticUserId }) => {
+  const { addProduct, addProductToUser, productsToUserMap } = useContext<InitContext>(CartContext);
   const { id, date, products } = item;
+  const foundProductToUser = productsToUserMap.find((ele) => ele.userId == staticUserId);
+  let productIdsToUser = [];
+  if (foundProductToUser) {
+    productIdsToUser = foundProductToUser?.productIds;
+  }
+  const addSelectedProductToUserMap = (productId: number) => {
+    addProductToUser(staticUserId, productId);
+  };
 
   return (
     <Card>
@@ -27,18 +36,28 @@ const WishListItem: FC<WishListItemProps> = ({ item, openModal, staticUserName =
         <Label>{getDate(date)}</Label>
       </div>
       <div className={styles.wish_list_box}>
-        {products.map((item: Product, indx: number) => (
-          <CSSTransition
-            key={`wishlist-id-${id}-${indx}`}
-            classNames="fadeIn"
-            timeout={{
-              enter: 300,
-              exit: 500,
-            }}
-          >
-            <WishItemProduct productItem={item} addToCart={addProduct} openModal={openModal} />
-          </CSSTransition>
-        ))}
+        {products.map((item: Product, indx: number) => {
+          const isProductPresentForUser = productIdsToUser.includes(item.productId);
+          return !isProductPresentForUser ? (
+            <CSSTransition
+              key={`wishlist-id-${id}-${indx}`}
+              classNames="fadeIn"
+              timeout={{
+                enter: 300,
+                exit: 500,
+              }}
+            >
+              <WishItemProduct
+                productItem={item}
+                mapProductToUser={addSelectedProductToUserMap}
+                addToCart={addProduct}
+                openModal={openModal}
+              />
+            </CSSTransition>
+          ) : (
+            ''
+          );
+        })}
       </div>
     </Card>
   );

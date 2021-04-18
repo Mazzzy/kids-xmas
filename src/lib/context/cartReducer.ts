@@ -47,6 +47,39 @@ const cartReducer = (state: InitContext, action: any) => {
         ...state,
         activeTab: action.payload,
       };
+    case 'ADD_PRODUCT_TO_USER': {
+      const newProdUserMap = [...state.productsToUserMap];
+      const userID = action.payload.userId;
+      const productID = action.payload.productId;
+      const isIdExist = newProdUserMap.findIndex((element) => element.userId === userID);
+      if (isIdExist !== -1) {
+        const foundElem = newProdUserMap[isIdExist];
+        const isProductPresent = foundElem.productIds.includes(productID);
+        if (!isProductPresent) {
+          foundElem.productIds.push(productID);
+        }
+      } else {
+        newProdUserMap.push({ userId: userID, productIds: [productID] });
+      }
+      return {
+        ...state,
+        productsToUserMap: newProdUserMap,
+      };
+    }
+
+    case 'REMOVE_PRODUCT_TO_USER': {
+      let newProdUserMap = state.productsToUserMap;
+      const productID = action.payload;
+      newProdUserMap.map((ele) => {
+        ele.productIds = ele.productIds.filter((x) => x !== productID);
+      });
+
+      return {
+        ...state,
+        productsToUserMap: newProdUserMap,
+      };
+    }
+
     default:
       return state;
   }

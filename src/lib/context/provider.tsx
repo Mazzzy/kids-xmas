@@ -2,16 +2,23 @@ import { createContext, useReducer } from 'react';
 import { Product, ProductLocal } from '@/lib/types';
 import CartReducer from './cartReducer';
 
+type ProductToUser = {
+  userId: number;
+  productIds: [];
+};
 export interface InitContext {
   cart: ProductLocal[];
   totalItems: number;
   totalAmount: number;
   searchTerm: string;
   activeTab: string;
+  productsToUserMap: ProductToUser[];
   removeProduct?: (id: number) => void;
   addProduct?: (selectedProducts: ProductLocal) => void;
   addSearchTerm?: (searchTerm: string) => void;
   addActiveTab?: (activeTab: string) => void;
+  addProductToUser?: (userId: number, productId: number) => void;
+  removeProductToUser?: (productId: number) => void;
 }
 
 const initialState = {
@@ -20,6 +27,7 @@ const initialState = {
   totalAmount: 0,
   searchTerm: '',
   activeTab: '',
+  productsToUserMap: [],
 };
 
 export const CartContext = createContext<InitContext>(initialState);
@@ -54,6 +62,18 @@ export const CartProvider = ({ children }: { children: any }) => {
     });
   };
 
+  const addProductToUser = (userId: number, productId: number) => {
+    dispatch({
+      type: 'ADD_PRODUCT_TO_USER',
+      payload: { userId, productId },
+    });
+  };
+  const removeProductToUser = (productId: number) => {
+    dispatch({
+      type: 'REMOVE_PRODUCT_TO_USER',
+      payload: productId,
+    });
+  };
   return (
     <CartContext.Provider
       value={{
@@ -62,10 +82,13 @@ export const CartProvider = ({ children }: { children: any }) => {
         totalAmount: state.totalAmount,
         searchTerm: state.searchTerm,
         activeTab: state.activeTab,
+        productsToUserMap: state.productsToUserMap,
         removeProduct,
         addProduct,
         addSearchTerm,
         addActiveTab,
+        addProductToUser,
+        removeProductToUser,
       }}
     >
       {children}

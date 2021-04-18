@@ -7,7 +7,7 @@ import EmptyCart from '@/components/molecules/emptycart';
 import styles from './cartcontent.module.css';
 
 const CartContent: FC = () => {
-  const { cart, totalAmount, removeProduct } = useContext<InitContext>(CartContext);
+  const { cart, totalAmount, removeProduct, removeProductToUser } = useContext<InitContext>(CartContext);
   let totalUnits = 0;
   let finalAmountToCheckout = 0;
   let totalDiscountAmount = 0;
@@ -45,7 +45,14 @@ const CartContent: FC = () => {
               After discount: <span className={styles.amount}>{finalProductAmount.toFixed(2)}</span>
             </p>
           </div>
-          <button className={styles.product_remove} onClick={() => removeProduct(product.id)} type="button">
+          <button
+            className={styles.product_remove}
+            onClick={() => {
+              removeProduct(product.id);
+              removeProductToUser(product.id);
+            }}
+            type="button"
+          >
             ×
           </button>
         </li>

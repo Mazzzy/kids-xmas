@@ -9,11 +9,12 @@ import styles from './product.module.css';
 
 interface WishItemProductProps {
   addToCart: (product: ProductLocal) => void;
+  mapProductToUser: (productId: number) => void;
   openModal: (product: QuickPreview) => void;
   productItem: any;
 }
 
-const WishItemProduct: FC<WishItemProductProps> = ({ addToCart, openModal, productItem }) => {
+const WishItemProduct: FC<WishItemProductProps> = ({ addToCart, openModal, productItem, mapProductToUser }) => {
   const { productId, quantity } = productItem;
   const { status, data, error } = useQuery(['product', productId], () => fetchProduct(productId));
   const [itemQuantity, updateItemQuantity] = useState<number>(quantity);
@@ -44,6 +45,7 @@ const WishItemProduct: FC<WishItemProductProps> = ({ addToCart, openModal, produ
       quantity: quantityLocal,
     };
     addToCart(selectedProduct);
+    mapProductToUser(idLocal);
     setAddState(true);
   };
 

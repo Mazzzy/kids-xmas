@@ -38,8 +38,16 @@ const WishList: FC<WishListProps> = ({ wishlistData, openModal }) => {
 
   // display searched by name wishlist data
   const wishlistCollection = filteredWishListData.map((wishListItem: WishItem) => {
-    const { name } = staticUserNames.find((item) => item.staticUserId === wishListItem.id);
-    return [<WishListItem key={wishListItem?.id} item={wishListItem} openModal={openModal} staticUserName={name} />];
+    const { staticUserId, name } = staticUserNames.find((item) => item.staticUserId === wishListItem.id);
+    return [
+      <WishListItem
+        key={wishListItem?.id}
+        item={wishListItem}
+        openModal={openModal}
+        staticUserName={name}
+        staticUserId={staticUserId}
+      />,
+    ];
   });
 
   let wishListView;
