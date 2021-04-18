@@ -29,7 +29,7 @@ const NavMenu: FC<NavMenuProps> = ({ activeTab, setActiveTabClick }) => {
                 No. of items: <strong>{totalItems}</strong>
               </li>
               <li>
-                Sub Total: <strong>{totalAmount}</strong>
+                Sub Total: <strong className={styles.navbar_info_total}>{totalAmount}</strong>
               </li>
             </ul>
             <img src="https://res.cloudinary.com/sivadass/image/upload/v1493548928/icons/bag.png" alt="Cart" />

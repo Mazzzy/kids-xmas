@@ -7,9 +7,11 @@ export interface InitContext {
   totalItems: number;
   totalAmount: number;
   searchTerm: string;
+  activeTab: string;
   removeProduct?: (id: number) => void;
   addProduct?: (selectedProducts: ProductLocal) => void;
   addSearchTerm?: (searchTerm: string) => void;
+  addActiveTab?: (activeTab: string) => void;
 }
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
   totalItems: 0,
   totalAmount: 0,
   searchTerm: '',
+  activeTab: '',
 };
 
 export const CartContext = createContext<InitContext>(initialState);
@@ -44,6 +47,13 @@ export const CartProvider = ({ children }: { children: any }) => {
     });
   };
 
+  const addActiveTab = (activeTab: string) => {
+    dispatch({
+      type: 'ADD_ACTIVE_TAB',
+      payload: activeTab,
+    });
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -51,9 +61,11 @@ export const CartProvider = ({ children }: { children: any }) => {
         totalItems: state.totalItems,
         totalAmount: state.totalAmount,
         searchTerm: state.searchTerm,
+        activeTab: state.activeTab,
         removeProduct,
         addProduct,
         addSearchTerm,
+        addActiveTab,
       }}
     >
       {children}

@@ -8,13 +8,14 @@ import NavMenu from '@/components/molecules/navmenu';
 import styles from './navbar.module.css';
 
 const Navbar: FC = (): JSX.Element => {
-  const { addSearchTerm } = useContext<InitContext>(CartContext);
-  const [activeTab, setActiveTab] = useState('all');
+  const { addSearchTerm, addActiveTab } = useContext<InitContext>(CartContext);
+  const [activeTab, setActiveTab] = useState('wish');
   const [term, setTerm] = useState<string>('');
 
   // nav item click
   const setActiveTabClick = (e: MouseEvent<HTMLAnchorElement>, name: string) => {
     setActiveTab(name);
+    addActiveTab(name);
   };
   // search by keyword
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

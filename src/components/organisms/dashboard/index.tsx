@@ -1,9 +1,12 @@
-import { FC, useState } from 'react';
+import { FC, useState, useContext } from 'react';
+import { CartContext, InitContext } from '@/lib/context/provider';
+import { WishItem, QuickPreview } from '@/lib/types';
+
 import HeadingText from '@/components/atoms/heading';
 import WishList from '@/components/molecules/wishlist';
 import QuickView from '@/components/molecules/quickview';
+import CardContent from '@/components/molecules/cartcontent';
 
-import { WishItem, QuickPreview } from '@/lib/types';
 import styles from './dashboard.module.css';
 
 interface DashboardContentProps {
@@ -13,7 +16,7 @@ interface DashboardContentProps {
 }
 const DashboardContent: FC<DashboardContentProps> = ({ wishListData, queryStatus, errorData }) => {
   const [modalActive, flipModelState] = useState<boolean>(false);
-
+  const { activeTab } = useContext<InitContext>(CartContext);
   const initQuickPreview = {
     image: 'blank',
     id: 0,
@@ -34,7 +37,7 @@ const DashboardContent: FC<DashboardContentProps> = ({ wishListData, queryStatus
     flipModelState(false);
   };
 
-  return (
+  const wishListContent = (
     <div className={styles.main_contents}>
       {queryStatus === 'loading' ? (
         <HeadingText title="Loading wishlist..." />
@@ -45,6 +48,10 @@ const DashboardContent: FC<DashboardContentProps> = ({ wishListData, queryStatus
       <QuickView product={quickViewProduct} openModalState={modalActive} closeModal={closeModal} />
     </div>
   );
+
+  const cartContent = <CardContent />;
+
+  return activeTab === 'cart' ? cartContent : wishListContent;
 };
 
 export default DashboardContent;

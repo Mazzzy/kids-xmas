@@ -42,6 +42,11 @@ const cartReducer = (state: InitContext, action: any) => {
         ...state,
         searchTerm: action.payload,
       };
+    case 'ADD_ACTIVE_TAB':
+      return {
+        ...state,
+        activeTab: action.payload,
+      };
     default:
       return state;
   }
