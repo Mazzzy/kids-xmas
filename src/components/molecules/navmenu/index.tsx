@@ -1,4 +1,5 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { FC, MouseEvent, useContext } from 'react';
+import { CartContext, InitContext } from '@/lib/context/provider';
 import NavItem from '@/components/atoms/navitem';
 import styles from './navmenu.module.css';
 
@@ -8,20 +9,32 @@ interface NavMenuProps {
 }
 
 const NavMenu: FC<NavMenuProps> = ({ activeTab, setActiveTabClick }) => {
+  const { totalItems, totalAmount } = useContext<InitContext>(CartContext);
   return (
     <div className={styles.navbar_menu}>
       <div className={styles.navbar_end}>
         <NavItem
-          className={`${activeTab === 'all' ? 'active_navitem' : ''}`}
-          clickHandler={(e: MouseEvent<HTMLAnchorElement>) => setActiveTabClick(e, 'all')}
+          className={`${activeTab === 'wish' ? 'active_navitem' : ''}`}
+          clickHandler={(e: MouseEvent<HTMLAnchorElement>) => setActiveTabClick(e, 'wish')}
         >
-          All Carts
+          Wish items
         </NavItem>
         <NavItem
-          className={`${activeTab === 'my' ? 'active_navitem' : ''}`}
-          clickHandler={(e: MouseEvent<HTMLAnchorElement>) => setActiveTabClick(e, 'my')}
+          className={`${activeTab === 'cart' ? 'active_navitem' : ''}`}
+          clickHandler={(e: MouseEvent<HTMLAnchorElement>) => setActiveTabClick(e, 'cart')}
         >
-          My Cart
+          <div className={styles.navbar_menu_cart}>
+            <ul className={styles.navbar_menu_info}>
+              <li>
+                No. of items: <strong>{totalItems}</strong>
+              </li>
+              <li>
+                Sub Total: <strong>{totalAmount}</strong>
+              </li>
+            </ul>
+            <img src="https://res.cloudinary.com/sivadass/image/upload/v1493548928/icons/bag.png" alt="Cart" />
+            {totalItems ? <span className={styles.cartCount}>{totalItems}</span> : ''}
+          </div>
         </NavItem>
       </div>
     </div>

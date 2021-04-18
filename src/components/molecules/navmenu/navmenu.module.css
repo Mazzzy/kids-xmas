@@ -6,5 +6,16 @@
 }
 .navbar_end {
   justify-content: flex-end;
+  display: flex;
   margin-left: auto;
+}
+.navbar_menu_cart {
+  display: flex;
+  justify-content: space-between;
+}
+.navbar_menu_info {
+  margin: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  padding: 0 16px;
 }
