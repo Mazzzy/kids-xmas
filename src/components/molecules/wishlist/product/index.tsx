@@ -23,7 +23,7 @@ const WishItemProduct: FC<WishItemProductProps> = ({ addToCart, openModal, produ
     if (!isAdded) {
       return;
     }
-    const timer1 = setTimeout(() => setAddState(false), 3500);
+    const timer1 = setTimeout(() => setAddState(false), 1500);
     // this will clear Timeout when component unmount like in willComponentUnmount
     return () => {
       clearTimeout(timer1);
@@ -45,7 +45,8 @@ const WishItemProduct: FC<WishItemProductProps> = ({ addToCart, openModal, produ
       quantity: quantityLocal,
     };
     addToCart(selectedProduct);
-    mapProductToUser(idLocal);
+    setTimeout(() => mapProductToUser(idLocal), 1500);
+
     setAddState(true);
   };
 
